@@ -16,15 +16,28 @@
  * limitations under the License.
  */
 
-import { moduleFor, test } from 'ember-qunit';
+import { moduleForComponent, test } from 'ember-qunit';
+import hbs from 'htmlbars-inline-precompile';
 
-moduleFor('controller:yarn-apps/services', 'Unit | Controller | yarn apps/services', {
-  // Specify the other units that are required for this test.
-  // needs: ['controller:foo']
+moduleForComponent('service-config-table', 'Integration | Component | service config table', {
+  integration: true
 });
 
-// Replace this with your real tests.
-test('it exists', function(assert) {
-  let controller = this.subject();
-  assert.ok(controller);
+test('it renders', function(assert) {
+
+  // Set any properties with this.set('myProperty', 'value');
+  // Handle any actions with this.on('myAction', function(val) { ... });" + EOL + EOL +
+
+  this.render(hbs`{{service-config-table}}`);
+
+  assert.equal(this.$().text().trim(), '');
+
+  // Template block usage:" + EOL +
+  this.render(hbs`
+    {{#service-config-table}}
+      template block text
+    {{/service-config-table}}
+  `);
+
+  assert.equal(this.$().text().trim(), 'template block text');
 });

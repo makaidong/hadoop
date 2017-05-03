@@ -21,12 +21,14 @@ module.exports = { // Yarn UI App configurations
       localBaseAddress: "",
       timelineWebAddress: "localhost:8188",
       rmWebAddress: "localhost:8088",
+      dashWebAddress: "localhost:9191",
       protocolScheme: "http:"
     },
     namespaces: {
       timeline: 'ws/v1/applicationhistory',
       cluster: 'ws/v1/cluster',
       metrics: 'ws/v1/cluster/metrics',
+      dashService: 'services/v1/applications',
       node: '{nodeAddress}/ws/v1/node'
     },
 };

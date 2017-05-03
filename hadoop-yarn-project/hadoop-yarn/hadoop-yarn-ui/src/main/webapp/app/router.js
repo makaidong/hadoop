@@ -26,7 +26,6 @@ var Router = Ember.Router.extend({
 Router.map(function() {
   this.route('yarn-apps', function () {
     this.route('apps');
-    this.route('services');
   });
   this.route('yarn-services');
   this.route('yarn-nodes', function(){
@@ -49,6 +48,7 @@ Router.map(function() {
   this.route('yarn-container-log', { path:
       '/yarn-container-log/:node_id/:node_addr/:container_id/:filename' });
 
+  this.route('yarn-deploy-service');
   this.route('cluster-overview');
   this.route('yarn-app', { path: '/yarn-app/:app_id' });
   this.route('yarn-app-attempt', { path: '/yarn-app-attempt/:app_attempt_id'});

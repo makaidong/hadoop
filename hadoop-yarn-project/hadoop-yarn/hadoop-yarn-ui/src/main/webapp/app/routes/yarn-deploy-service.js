@@ -16,7 +16,12 @@
  * limitations under the License.
  */
 
-import AppTableController from '../app-table-columns';
+import Ember from 'ember';
 
-export default AppTableController.extend({
+export default Ember.Route.extend({
+  model() {
+    return this.store.createRecord('yarn-servicedef', {
+      id: 'yarn_servicedef_' + Date.now()
+    });
+  }
 });

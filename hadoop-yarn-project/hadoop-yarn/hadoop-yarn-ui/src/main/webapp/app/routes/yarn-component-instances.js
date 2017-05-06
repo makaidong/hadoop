@@ -16,15 +16,14 @@
  * limitations under the License.
  */
 
-import { moduleFor, test } from 'ember-qunit';
+import AbstractRoute from './abstract';
 
-moduleFor('controller:yarn-app-attempts', 'Unit | Controller | yarn app attempts', {
-  // Specify the other units that are required for this test.
-  // needs: ['controller:foo']
-});
-
-// Replace this with your real tests.
-test('it exists', function(assert) {
-  let controller = this.subject();
-  assert.ok(controller);
+export default AbstractRoute.extend({
+  actions: {
+    updateBreadcrumbs(appId, serviceName, componentName, tailCrumbs) {
+      var controller = this.controllerFor('yarn-component-instances');
+      controller.setProperties({appId: appId, componentName: componentName, serviceName: serviceName});
+      controller.updateBreadcrumbs(appId, serviceName, componentName, tailCrumbs);
+    }
+  }
 });

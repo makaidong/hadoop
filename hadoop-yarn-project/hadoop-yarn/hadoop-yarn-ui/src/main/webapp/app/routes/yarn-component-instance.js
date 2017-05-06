@@ -20,10 +20,10 @@ import AbstractRoute from './abstract';
 
 export default AbstractRoute.extend({
   actions: {
-    updateBreadcrumbs(appId, serviceName, tailCrumbs) {
-      var controller = this.controllerFor('yarn-app');
-      controller.setProperties({appId: appId, serviceName: serviceName});
-      controller.updateBreadcrumbs(appId, serviceName, tailCrumbs);
+    updateBreadcrumbs(appId, serviceName, componentName, instanceName) {
+      var controller = this.controllerFor('yarn-component-instance');
+      controller.setProperties({appId: appId, serviceName: serviceName, componentName: componentName, instanceName: instanceName});
+      controller.updateBreadcrumbs(appId, serviceName, componentName, instanceName);
     }
   }
 });

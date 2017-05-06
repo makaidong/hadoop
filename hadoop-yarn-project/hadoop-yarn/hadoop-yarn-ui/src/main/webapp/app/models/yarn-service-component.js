@@ -16,14 +16,31 @@
  * limitations under the License.
  */
 
-import AbstractRoute from './abstract';
+import DS from 'ember-data';
+import Ember from 'ember';
+import Converter from 'yarn-ui/utils/converter';
 
-export default AbstractRoute.extend({
-  actions: {
-    updateBreadcrumbs(appId, serviceName, tailCrumbs) {
-      var controller = this.controllerFor('yarn-app');
-      controller.setProperties({appId: appId, serviceName: serviceName});
-      controller.updateBreadcrumbs(appId, serviceName, tailCrumbs);
+export default DS.Model.extend({
+  name: DS.attr('string'),
+  vcores: DS.attr('string'),
+  memory: DS.attr('string'),
+  priority: DS.attr('string'),
+  instances: DS.attr('string'),
+  createdTimestamp: DS.attr('number'),
+
+  configs: DS.attr({defaultValue: function() {
+    return Ember.A();
+  }}),
+
+  metrics: DS.attr({defaultValue: function() {
+    return Ember.Object.create();
+  }}),
+
+  createdDate: Ember.computed('createdTimestamp', function() {
+    var timestamp = this.get('createdTimestamp');
+    if (timestamp > 0) {
+      return Converter.timeStampToDate(timestamp);
     }
-  }
+    return 'N/A';
+  })
 });

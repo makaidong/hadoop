@@ -16,14 +16,15 @@
  * limitations under the License.
  */
 
-import AbstractRoute from './abstract';
+import { moduleForModel, test } from 'ember-qunit';
 
-export default AbstractRoute.extend({
-  actions: {
-    updateBreadcrumbs(appId, serviceName, tailCrumbs) {
-      var controller = this.controllerFor('yarn-app');
-      controller.setProperties({appId: appId, serviceName: serviceName});
-      controller.updateBreadcrumbs(appId, serviceName, tailCrumbs);
-    }
-  }
+moduleForModel('yarn-service-info', 'Unit | Model | yarn service info', {
+  // Specify the other units that are required for this test.
+  needs: []
+});
+
+test('it exists', function(assert) {
+  let model = this.subject();
+  // let store = this.store();
+  assert.ok(!!model);
 });

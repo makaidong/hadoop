@@ -19,46 +19,41 @@
 import Ember from 'ember';
 
 export default Ember.Controller.extend({
-  queryParams: ["service"],
-  service: undefined,
+  componentName: '',
+  instanceName: '',
+  serviceName: '',
+  appId: '',
 
-  breadcrumbs: Ember.computed("model.attempt.appId", function () {
-    var appId = this.get("model.attempt.appId");
-    var attemptId = this.get("model.attempt.id");
-    var serviceName = this.get('service');
-    var breadcrumbs = [{
+  breadcrumbs: [{
+    text: "Home",
+    routeName: 'application'
+  }, {
+    text: "Services",
+    routeName: 'yarn-services',
+  }],
+
+  updateBreadcrumbs(appId, serviceName, componentName, instanceName) {
+    var crumbs =  [{
       text: "Home",
       routeName: 'application'
-    },{
-      text: "Applications",
-      routeName: 'yarn-apps.apps'
     }, {
-      text: `App [${appId}]`,
-      href: `#/yarn-app/${appId}/info`
-    }, {
-      text: "Attempts",
-      href: `#/yarn-app/${appId}/attempts`
-    }, {
-      text: `Attempt [${attemptId}]`
+      text: "Services",
+      routeName: 'yarn-services',
     }];
-    if (serviceName) {
-      breadcrumbs = [{
-        text: "Home",
-        routeName: 'application'
-      }, {
-        text: "Services",
-        routeName: 'yarn-services'
-      }, {
+    if (appId && serviceName && componentName && instanceName) {
+      crumbs.push({
         text: `${serviceName} [${appId}]`,
         href: `#/yarn-app/${appId}/info?service=${serviceName}`
       }, {
-        text: "Attempts",
-        href: `#/yarn-app/${appId}/attempts?service=${serviceName}`
+        text: 'Components',
+        href: `#/yarn-app/${appId}/components?service=${serviceName}`
       }, {
-        text: `Attempt [${attemptId}]`
-      }];
+        text: `${componentName}`,
+        href: `#/yarn-component-instances/${componentName}/info?service=${serviceName}&&appid=${appId}`
+      }, {
+        text: `${instanceName}`
+      });
     }
-    return breadcrumbs;
-  })
-
+    this.set('breadcrumbs', crumbs);
+  }
 });

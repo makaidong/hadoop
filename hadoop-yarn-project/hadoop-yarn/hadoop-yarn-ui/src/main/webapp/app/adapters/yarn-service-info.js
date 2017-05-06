@@ -16,14 +16,17 @@
  * limitations under the License.
  */
 
-import AbstractRoute from './abstract';
+import AbstractAdapter from './abstract';
 
-export default AbstractRoute.extend({
-  actions: {
-    updateBreadcrumbs(appId, serviceName, tailCrumbs) {
-      var controller = this.controllerFor('yarn-app');
-      controller.setProperties({appId: appId, serviceName: serviceName});
-      controller.updateBreadcrumbs(appId, serviceName, tailCrumbs);
-    }
+export default AbstractAdapter.extend({
+  address: "timelineWebAddress",
+  restNameSpace: "timelineService",
+  serverName: "ATS",
+
+  urlForQueryRecord(query/*, modelName*/) {
+    var url = this.buildURL();
+    url += '/' + query.appId + '/entities/SERVICE_ATTEMPT?fields=ALL';
+    delete query.appId;
+    return url;
   }
 });

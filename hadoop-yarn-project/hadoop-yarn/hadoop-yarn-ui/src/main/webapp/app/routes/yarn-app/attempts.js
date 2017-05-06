@@ -16,14 +16,21 @@
  * limitations under the License.
  */
 
-import AbstractRoute from './abstract';
+import AbstractRoute from '../abstract';
 
 export default AbstractRoute.extend({
-  actions: {
-    updateBreadcrumbs(appId, serviceName, tailCrumbs) {
-      var controller = this.controllerFor('yarn-app');
-      controller.setProperties({appId: appId, serviceName: serviceName});
-      controller.updateBreadcrumbs(appId, serviceName, tailCrumbs);
-    }
+  model(param, transition) {
+    transition.send('updateBreadcrumbs', param.app_id, param.service, [{text: 'Attempts'}]);
+    return this.store.query('yarn-app-attempt', {appId: param.app_id}).then(function (attempts) {
+      return {
+        appId: param.app_id,
+        serviceName: param.service,
+        attempts: attempts
+      };
+    });
+  },
+
+  unloadAll() {
+    this.store.unloadAll('yarn-app-attempt');
   }
 });

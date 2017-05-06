@@ -16,19 +16,17 @@
  * limitations under the License.
  */
 
-import AbstractRoute from './abstract';
+import AbstractAdapter from './abstract';
 
-export default AbstractRoute.extend({
-  model(param) {
-    return this.store.query('yarn-app-attempt', { appId: param.app_id}).then(function (attempts) {
-      return {
-        appId: param.app_id,
-        attempts: attempts
-      };
-    });
-  },
+export default AbstractAdapter.extend({
+  address: "timelineWebAddress",
+  restNameSpace: "timelineService",
+  serverName: "ATS",
 
-  unloadAll() {
-    this.store.unloadAll('yarn-app-attempt');
+  urlForQuery(query/*, modelName*/) {
+    var url = this.buildURL();
+    url += '/' + query.appId + '/entities/COMPONENT_INSTANCE?fields=ALL';
+    delete query.appId;
+    return url;
   }
 });

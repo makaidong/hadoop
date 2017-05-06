@@ -26,6 +26,7 @@ module.exports = { // Yarn UI App configurations
     },
     namespaces: {
       timeline: 'ws/v1/applicationhistory',
+      timelineService: 'ws/v2/timeline/apps',
       cluster: 'ws/v1/cluster',
       metrics: 'ws/v1/cluster/metrics',
       dashService: 'services/v1/applications',

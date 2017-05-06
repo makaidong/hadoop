@@ -1,4 +1,4 @@
-/**
+{{!
  * Licensed to the Apache Software Foundation (ASF) under one
  * or more contributor license agreements.  See the NOTICE file
  * distributed with this work for additional information
@@ -14,16 +14,15 @@
  * WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied.
  * See the License for the specific language governing permissions and
  * limitations under the License.
- */
+}}
 
-import AbstractRoute from './abstract';
+<div class="row">
+  <div class="col-md-12">
+    <h3>Active Components: {{model.componentName}}</h3>
+    {{em-table columns=tableColumns rows=model.instances}}
+  </div>
+</div>
 
-export default AbstractRoute.extend({
-  actions: {
-    updateBreadcrumbs(appId, serviceName, tailCrumbs) {
-      var controller = this.controllerFor('yarn-app');
-      controller.setProperties({appId: appId, serviceName: serviceName});
-      controller.updateBreadcrumbs(appId, serviceName, tailCrumbs);
-    }
-  }
-});
+<div class="col-md-12">
+  {{metrics-table metrics=model.metrics type="Component"}}
+</div>

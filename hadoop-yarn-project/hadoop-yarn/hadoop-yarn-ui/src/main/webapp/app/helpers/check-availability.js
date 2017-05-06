@@ -16,14 +16,13 @@
  * limitations under the License.
  */
 
-import AbstractRoute from './abstract';
+import Ember from 'ember';
 
-export default AbstractRoute.extend({
-  actions: {
-    updateBreadcrumbs(appId, serviceName, tailCrumbs) {
-      var controller = this.controllerFor('yarn-app');
-      controller.setProperties({appId: appId, serviceName: serviceName});
-      controller.updateBreadcrumbs(appId, serviceName, tailCrumbs);
-    }
+export function checkAvailability(params/*, hash*/) {
+  if (params[0] !== undefined && params[0] !== null && params[0] !== '') {
+    return params[0];
   }
-});
+  return 'N/A';
+}
+
+export default Ember.Helper.helper(checkAvailability);

@@ -16,14 +16,13 @@
  * limitations under the License.
  */
 
-import AbstractRoute from './abstract';
+import { checkAvailability } from '../../../helpers/check-availability';
+import { module, test } from 'qunit';
 
-export default AbstractRoute.extend({
-  actions: {
-    updateBreadcrumbs(appId, serviceName, tailCrumbs) {
-      var controller = this.controllerFor('yarn-app');
-      controller.setProperties({appId: appId, serviceName: serviceName});
-      controller.updateBreadcrumbs(appId, serviceName, tailCrumbs);
-    }
-  }
+module('Unit | Helper | check availability');
+
+// Replace this with your real tests.
+test('it works', function(assert) {
+  let result = checkAvailability(42);
+  assert.ok(result);
 });

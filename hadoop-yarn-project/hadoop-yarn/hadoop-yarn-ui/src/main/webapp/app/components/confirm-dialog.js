@@ -16,14 +16,16 @@
  * limitations under the License.
  */
 
-import AbstractRoute from './abstract';
+import Ember from 'ember';
 
-export default AbstractRoute.extend({
+export default Ember.Component.extend({
+  dialogId: "confirmModalDialog",
+  title: "Confirm",
+  message: "Are you sure?",
+
   actions: {
-    updateBreadcrumbs(appId, serviceName, tailCrumbs) {
-      var controller = this.controllerFor('yarn-app');
-      controller.setProperties({appId: appId, serviceName: serviceName});
-      controller.updateBreadcrumbs(appId, serviceName, tailCrumbs);
+    yesConfirmed() {
+      this.sendAction();
     }
   }
 });

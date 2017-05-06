@@ -16,14 +16,29 @@
  * limitations under the License.
  */
 
-import AbstractRoute from './abstract';
+import Ember from 'ember';
+import AbstractRoute from '../abstract';
 
 export default AbstractRoute.extend({
-  actions: {
-    updateBreadcrumbs(appId, serviceName, tailCrumbs) {
-      var controller = this.controllerFor('yarn-app');
-      controller.setProperties({appId: appId, serviceName: serviceName});
-      controller.updateBreadcrumbs(appId, serviceName, tailCrumbs);
-    }
+  model(params, transition) {
+    var componentName = params.component_name;
+    transition.send('updateBreadcrumbs', params.appid, params.service, componentName, [{text: 'Configurations'}]);
+    return Ember.RSVP.hash({
+      appId: params.appid,
+      serviceName: params.service,
+      componentName: componentName,
+      configs: this.store.query('yarn-service-component', {appId: params.appid}).then(function(components) {
+        if (components && components.findBy('name', componentName)) {
+          return components.findBy('name', componentName).get('configs');
+        }
+        return [];
+      }, function() {
+        return [];
+      })
+    });
+  },
+
+  unloadAll() {
+    this.store.unloadAll('yarn-service-component');
   }
 });

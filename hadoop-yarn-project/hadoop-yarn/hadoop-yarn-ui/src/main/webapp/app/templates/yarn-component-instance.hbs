@@ -24,32 +24,20 @@
     <div class="col-md-2 container-fluid">
       <div class="panel panel-default">
         <div class="panel-heading">
-          <h4>Application</h4>
+          Component
         </div>
         <div class="panel-body">
-          <ul class="nav nav-pills nav-stacked" id="stacked-menu">
-            <ul class="nav nav-pills nav-stacked collapse in">
-              {{#link-to 'yarn-app' tagName="li"}}
-                {{#link-to 'yarn-app' model.appId (query-params service=service)}}Information
-                {{/link-to}}
-              {{/link-to}}
-              {{#link-to 'yarn-app-attempts' tagName="li"}}
-                {{#link-to 'yarn-app-attempts' model.appId (query-params service=service)}}Attempts List
-                {{/link-to}}
-              {{/link-to}}
-            </ul>
+          <ul class="nav nav-pills nav-stacked collapse in">
+            {{#link-to 'yarn-component-instance.info' tagName="li" class=(if (eq target.currentPath 'yarn-component-instance.info') "active")}}
+              {{#link-to 'yarn-component-instance.info' componentName instanceName (query-params service=serviceName appid=appId)}}Information{{/link-to}}
+            {{/link-to}}
           </ul>
         </div>
       </div>
     </div>
 
     <div class="col-md-10 container-fluid">
-      <!-- timeline view of children -->
-      <div class="row">
-         {{timeline-view parent-id="attempt-timeline-div" my-id="timeline-view" height="100%" rmModel=model.attempts label="shortAppAttemptId" attemptModel=true serviceName=service}}
-      </div>
+      {{outlet}}
     </div>
-
   </div>
 </div>
-{{outlet}}

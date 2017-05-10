@@ -1,4 +1,4 @@
-/**
+/*
  * Licensed to the Apache Software Foundation (ASF) under one
  * or more contributor license agreements.  See the NOTICE file
  * distributed with this work for additional information
@@ -16,22 +16,8 @@
  * limitations under the License.
  */
 
-package org.apache.hadoop.yarn.server.resourcemanager;
-
-import org.apache.hadoop.classification.InterfaceAudience;
-
-@InterfaceAudience.Private
-public enum RMFatalEventType {
-  // Source <- Store
-  STATE_STORE_FENCED,
-  STATE_STORE_OP_FAILED,
-
-  // Source <- Embedded Elector
-  EMBEDDED_ELECTOR_FAILED,
-
-  // Source <- Admin Service
-  TRANSITION_TO_ACTIVE_FAILED,
-
-  // Source <- Critical Thread Crash
-  CRITICAL_THREAD_CRASH
-}
+/**
+ * Filesystem implementations that allow Hadoop to read directly from
+ * HTTP / HTTPS endpoints.
+ */
+package org.apache.hadoop.fs.http;
